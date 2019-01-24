@@ -28,7 +28,7 @@ func (t *Employees) InsertData(db *gorm.DB) (err error) {
 }
 
 // UpdateData -
-func (t Employees) UpdateData(db *gorm.DB, inputdata *Employees) (res Employees, err error) {
+func (t Employees) UpdateData(db *gorm.DB, inputdata *Employees) (res *Employees, err error) {
 	data := new(Employees)
 
 	db.Where("name = ?", t.Name).First(&data)
@@ -37,7 +37,7 @@ func (t Employees) UpdateData(db *gorm.DB, inputdata *Employees) (res Employees,
 	data.Address = inputdata.Address
 
 	err = db.Save(&data).Error
-
+	res = data
 	return
 }
 
